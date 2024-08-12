@@ -10,8 +10,8 @@ class _MobileOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const overlayColor = Colors.black38;
-    const itemColor = Colors.white;
-    final podCtr = Get.find<PodGetXVideoController>(tag: tag);
+    // const itemColor = Colors.white;
+    // final podCtr = Get.find<PodGetXVideoController>(tag: tag);
     return Stack(
       alignment: Alignment.center,
       children: [
