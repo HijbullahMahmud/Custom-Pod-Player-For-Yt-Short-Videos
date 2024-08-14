@@ -1,1 +1,0 @@
- /Users/macmini/Downloads/pod_player-0.2.2/example/.dart_tool/flutter_build/508a663933a24ea58067b91747528264/native_assets.yaml: 
