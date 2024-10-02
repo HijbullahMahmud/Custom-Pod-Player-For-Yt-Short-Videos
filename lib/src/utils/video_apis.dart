@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import '../models/vimeo_models.dart';
 
 String podErrorString(String val) {
@@ -124,44 +123,45 @@ class VideoApis {
     String youtubeIdOrUrl,
     bool live,
   ) async {
-    try {
-      final yt = YoutubeExplode();
-      final urls = <VideoQalityUrls>[];
-      if (live) {
-        final url = await yt.videos.streamsClient.getHttpLiveStreamUrl(
-          VideoId(youtubeIdOrUrl),
-        );
-        urls.add(
-          VideoQalityUrls(
-            quality: 360,
-            url: url,
-          ),
-        );
-      } else {
-        final manifest =
-            await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
-        urls.addAll(
-          manifest.muxed.map(
-            (element) => VideoQalityUrls(
-              quality: int.parse(element.qualityLabel.split('p')[0]),
-              url: element.url.toString(),
-            ),
-          ),
-        );
-      }
-      // Close the YoutubeExplode's http client.
-      yt.close();
-      return urls;
-    } catch (error) {
-      if (error.toString().contains('XMLHttpRequest')) {
-        log(
-          podErrorString(
-            '(INFO) To play youtube video in WEB, Please enable CORS in your browser',
-          ),
-        );
-      }
-      debugPrint('===== YOUTUBE API ERROR: $error ==========');
-      rethrow;
-    }
+    return null;
+    // try {
+    //   final yt = YoutubeExplode();
+    //   final urls = <VideoQalityUrls>[];
+    //   if (live) {
+    //     final url = await yt.videos.streamsClient.getHttpLiveStreamUrl(
+    //       VideoId(youtubeIdOrUrl),
+    //     );
+    //     urls.add(
+    //       VideoQalityUrls(
+    //         quality: 360,
+    //         url: url,
+    //       ),
+    //     );
+    //   } else {
+    //     final manifest =
+    //         await yt.videos.streamsClient.getManifest(youtubeIdOrUrl);
+    //     urls.addAll(
+    //       manifest.muxed.map(
+    //         (element) => VideoQalityUrls(
+    //           quality: int.parse(element.qualityLabel.split('p')[0]),
+    //           url: element.url.toString(),
+    //         ),
+    //       ),
+    //     );
+    //   }
+    //   // Close the YoutubeExplode's http client.
+    //   yt.close();
+    //   return urls;
+    // } catch (error) {
+    //   if (error.toString().contains('XMLHttpRequest')) {
+    //     log(
+    //       podErrorString(
+    //         '(INFO) To play youtube video in WEB, Please enable CORS in your browser',
+    //       ),
+    //     );
+    //   }
+    //   debugPrint('===== YOUTUBE API ERROR: $error ==========');
+    //   rethrow;
+    // }
   }
 }
